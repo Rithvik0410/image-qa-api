@@ -22,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class Request(BaseModel):
     image_base64: str
     question: str
@@ -45,7 +46,7 @@ Rules:
 """
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-flash-lite",
         contents=[
             prompt,
             types.Part.from_bytes(
@@ -55,9 +56,7 @@ Rules:
         ],
     )
 
-    return {
-        "answer": response.text.strip()
-    }
+    return {"answer": response.text.strip()}
 
 
 @app.get("/")
